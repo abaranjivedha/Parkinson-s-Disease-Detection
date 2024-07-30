@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkinson's Disease Prediction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FFEFD5; /* Warm background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            flex: 1;
+        }
+        .form-group input[type="text"] {
+            flex: 2;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group input[type="submit"] {
+            background-color: #FF6347; /* Warm button color */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #FF4500; /* Darker warm button color */
+        }
+        .result {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .result.positive {
+            background-color: #ffcccc;
+            color: #d9534f;
+        }
+        .result.negative {
+            background-color: #d4edda;
+            color: #5cb85c;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Parkinson's Disease Prediction</h1>
+        {% if prediction_result %}
+        <div class="result {{ prediction_class }}">
+            {{ prediction_result }}
+        </div>
+        {% endif %}
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="PPE">PPE (Pitch Period Entropy):</label>
+                <input type="text" name="PPE" id="PPE" required>
+            </div>
+            <div class="form-group">
+                <label for="DFA">DFA (Detrended Fluctuation Analysis):</label>
+                <input type="text" name="DFA" id="DFA" required>
+            </div>
+            <div class="form-group">
+                <label for="RPDE">RPDE (Recurrence Period Density Entropy):</label>
+                <input type="text" name="RPDE" id="RPDE" required>
+            </div>
+            <div class="form-group">
+                <label for="numPulses">Number of Pulses:</label>
+                <input type="text" name="numPulses" id="numPulses" required>
+            </div>
+            <div class="form-group">
+                <label for="numPeriodsPulses">Number of Periods Pulses:</label>
+                <input type="text" name="numPeriodsPulses" id="numPeriodsPulses" required>
+            </div>
+            <div class="form-group">
+                <label for="meanPeriodPulses">Mean Period Pulses:</label>
+                <input type="text" name="meanPeriodPulses" id="meanPeriodPulses" required>
+            </div>
+            <div class="form-group">
+                <label for="stdDevPeriodPulses">Standard Deviation Period Pulses:</label>
+                <input type="text" name="stdDevPeriodPulses" id="stdDevPeriodPulses" required>
+            </div>
+            <div class="form-group">
+                <label for="locPctJitter">Local Percentage Jitter:</label>
+                <input type="text" name="locPctJitter" id="locPctJitter" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Predict">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
